@@ -7,6 +7,8 @@
 
 
 bool test_safe(std::vector<int>& report) {
+    // iterate over each report, determining if it is either increasing or decreasing
+    // and that max step between values is 3
     int prev;
     int number;
     bool inc = false;
@@ -36,6 +38,7 @@ bool test_safe(std::vector<int>& report) {
 
 bool test_safe_dampened(std::vector<int>& report) {
     // the longest report is like 8 levels long - were just gonna brute force it
+    // drop each index, check if the report is now safe
     for (std::size_t i = 0; i < report.size(); ++i) {
         std::vector<int> damp = report;
         damp.erase(damp.begin() + i);

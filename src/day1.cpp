@@ -5,6 +5,7 @@
 #include <cmath>
 #include <map>
 
+// iterates over lists, accumulating the pairwise difference score between them
 void list_difference(std::vector<int> &list1, std::vector<int> &list2) {
     int acc = 0;
     for (std::size_t i = 0; i < list1.size(); ++i) {
@@ -13,6 +14,7 @@ void list_difference(std::vector<int> &list1, std::vector<int> &list2) {
     std::cout << "Difference: " << acc << std::endl;
 }
 
+// iterates over lists, accumulating the pairwise similarity score between them
 void list_similarity(std::vector<int> &list1, std::vector<int> &list2) {
     std::map<int, int> freq;
     for (int id : list2) {
@@ -28,6 +30,7 @@ void list_similarity(std::vector<int> &list1, std::vector<int> &list2) {
 
 int main() {
     std::ifstream input ("../inputs/day1.txt");
+    // parse input file
     if (input.is_open()) {
         std::vector<int> list1;
         std::vector<int> list2;
@@ -41,6 +44,7 @@ int main() {
         std::sort(list1.begin(), list1.end());
         std::sort(list2.begin(), list2.end());
 
+        // compute difference and similaritys
         list_difference(list1, list2);
         list_similarity(list1, list2);
 
