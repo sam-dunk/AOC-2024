@@ -10,9 +10,9 @@ private:
     std::vector<std::vector<char>> grid;
 
     // Helper function to check if a word exists in a specific direction
-    bool matchWord(const std::string& word, int startR, int startC, int dr, int dc, bool reverse = false) {
-        int rows = grid.size();
-        int cols = grid[0].size();
+    bool matchWord(const std::string& word, size_t startR, size_t startC, int dr, int dc, bool reverse = false) {
+        size_t rows = grid.size();
+        size_t cols = grid[0].size();
         
         // Check boundary conditions
         if (startR + dr * (word.length()-1) < 0 || 
@@ -23,7 +23,7 @@ private:
         }
         
         // Check if word matches in this direction
-        for (int i = 0; i < word.length(); i++) {
+        for (size_t i = 0; i < word.length(); i++) {
             char expected = reverse ? word[word.length() - 1 - i] : word[i];
             if (grid[startR + i*dr][startC + i*dc] != expected) {
                 return false;
@@ -74,8 +74,8 @@ public:
         };
         
         // Search from every cell
-        for (int r = 0; r < grid.size(); r++) {
-            for (int c = 0; c < grid[0].size(); c++) {
+        for (size_t r = 0; r < grid.size(); r++) {
+            for (size_t c = 0; c < grid[0].size(); c++) {
                 for (const auto& [dr, dc] : directions) {
                     if (matchWord(word, r, c, dr, dc)) {
                         totalOccurrences++;
@@ -91,8 +91,8 @@ public:
         int xmasCount = 0;
         
         // Search from every cell (ignoring borders)
-        for (int r = 1; r < grid.size() - 1; r++) {
-            for (int c = 1; c < grid[0].size() - 1; c++) {
+        for (size_t r = 1; r < grid.size() - 1; r++) {
+            for (size_t c = 1; c < grid[0].size() - 1; c++) {
                 xmasCount += checkXMASPattern(r, c);
             }
         }

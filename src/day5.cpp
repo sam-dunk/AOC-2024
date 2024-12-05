@@ -20,17 +20,17 @@ bool is_valid_order(std::unordered_map<int, std::unordered_set<int>>& rules, std
 
 int fix_order(std::unordered_map<int, std::unordered_set<int>>& rules, std::vector<int>& update) {
     // while update is NOT in a valid order, iterate through vector swapping indices that violate rules
-    while (!is_valid_order(rules, update)) {
+    do {
         for (size_t i = 0; i < update.size(); ++i) {
-        for (size_t j = i + 1; j < update.size(); ++j) {
-            if (rules.at(update[j]).count(update[i])) {
-                int temp = update[i];
-                update[i] = update[j];
-                update[j] = temp;
+            for (size_t j = i + 1; j < update.size(); ++j) {
+                if (rules.at(update[j]).count(update[i])) {
+                    int temp = update[i];
+                    update[i] = update[j];
+                    update[j] = temp;
+                }
             }
         }
-    }
-    }
+    } while (!is_valid_order(rules, update));
 
     int middleIndex = update.size() / 2;
     return update[middleIndex];
