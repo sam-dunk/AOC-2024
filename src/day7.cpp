@@ -141,20 +141,21 @@ main ()
     }
 
     // Part 1
-    long long acc1 = 0;
+    long long acc = 0;
+    std::vector<std::pair<long long, std::vector<long long>>> pt2_eqs;
     for (std::pair<long long, std::vector<long long>> eq : eqs) {
-        if (test_eq_part1(eq)) acc1 += eq.first;
+        if (test_eq_part1(eq)) acc += eq.first;
+        else pt2_eqs.emplace_back(eq);
     }
 
-    std::cout << "Part 1: " << acc1 << std::endl;
+    std::cout << "Part 1: " << acc << std::endl;
 
-    // Part 2
-    long long acc2 = 0;
-    for (std::pair<long long, std::vector<long long>> eq : eqs) {
-        if (test_eq_part2(eq)) acc2 += eq.first;
+    // Part 2 - more expensive so only testing things that failed pt 1
+    for (std::pair<long long, std::vector<long long>> eq : pt2_eqs) {
+        if (test_eq_part2(eq)) acc += eq.first;
     }
 
-    std::cout << "Part 2: " << acc2 << std::endl;
+    std::cout << "Part 2: " << acc << std::endl;
 
     return 0;
 }
